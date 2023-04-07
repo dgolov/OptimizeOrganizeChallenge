@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app import control
+from api.app import control
 
 
 routes = APIRouter()

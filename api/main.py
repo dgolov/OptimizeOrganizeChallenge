@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from starlette.requests import Request
 from starlette.responses import Response
-from routes import routes
+from api.routes import routes
 
 
 app = FastAPI()
