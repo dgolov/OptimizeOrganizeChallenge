@@ -1,0 +1,8 @@
+.env
+.idea/
+__pycahce__/
+
+env/
+venv/
+
+*.log
