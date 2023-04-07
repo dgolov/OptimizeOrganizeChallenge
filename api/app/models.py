@@ -1,4 +1,4 @@
-from core.engine import Base
+from api.core.engine import Base
 from sqlalchemy import Column, String, Integer, DateTime, Float, ForeignKey, Boolean
 
 
