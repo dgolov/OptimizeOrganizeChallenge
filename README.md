@@ -20,6 +20,7 @@ sqlalchemy.url = postgresql+asyncpg://login:password@db:5432/dbname
 ```shell
 alembic init -t async migrations
 web alembic revision --autogenerate -m "init"
+alembic upgrade head 
 ```
 
 # Run
