@@ -13,6 +13,8 @@ SECRET=SECRET
 
 ### Alembic
 
+https://testdriven.io/blog/fastapi-sqlmodel/
+
 sqlalchemy.url = postgresql+asyncpg://login:password@db:5432/dbname
 
 ```shell
