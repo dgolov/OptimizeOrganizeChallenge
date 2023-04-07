@@ -6,7 +6,7 @@
 
 ```
 DB_URL = sqlalchemy.url
-LOGGING_PATH = lof file
+LOGGING_PATH = log file path
 DEBUG = debug mode
 SECRET=SECRET
 ```
