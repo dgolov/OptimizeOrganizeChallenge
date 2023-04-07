@@ -23,5 +23,5 @@ web alembic revision --autogenerate -m "init"
 # Run
 
 ```shell
-source run.sh
+sudo docker-compose up
 ```
