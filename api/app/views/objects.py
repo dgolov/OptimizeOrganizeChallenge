@@ -112,3 +112,35 @@ async def delete_object(
         session: AsyncSession = Depends(get_async_session),
 ):
     return await service.delete_solution(pk, session)
+
+
+@router.get("/work_group")
+async def get_object(session: AsyncSession = Depends(get_async_session)):
+    return await service.get_work_group_list(session)
+
+
+@router.post("/work_group")
+async def create_object(
+        object_: schemas.work_group.CreateWorkGroup,
+        session: AsyncSession = Depends(get_async_session),
+):
+    return await service.create_work_group(object_, session)
+
+
+@router.put("/work_group")
+async def update_object(
+        pk: int,
+        object_: schemas.work_group.CreateWorkGroup,
+        session: AsyncSession = Depends(get_async_session),
+):
+    return await service.update_work_group(pk, object_, session)
+
+
+@router.delete("/work_group")
+async def delete_object(
+        pk: int,
+        session: AsyncSession = Depends(get_async_session),
+):
+    return await service.delete_work_group(pk, session)
+
+
