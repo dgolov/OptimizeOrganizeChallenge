@@ -16,3 +16,5 @@ SQLAlchemy==2.0.9
 starlette==0.26.1
 typing_extensions==4.5.0
 uvicorn==0.21.1
+fastapi-users==10.3.0
+fastapi-users-db-sqlalchemy==4.0.5
