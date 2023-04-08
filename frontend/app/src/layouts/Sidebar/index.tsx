@@ -10,36 +10,39 @@ export const Sidebar = () => {
 				})}
 				className={styles['sidebarLink']}
 				to='/'>
-				Поручения
+				Объекты
 			</NavLink>
 			<NavLink
-				style={({ isActive }) => {
-					return {
-						fontWeight: isActive ? 'bold' : '',
-					}
-				}}
+				style={({ isActive }) => ({
+					fontWeight: isActive ? 'bold' : '',
+				})}
 				className={styles['sidebarLink']}
-				to='/'>
-				События
-			</NavLink>
-			<NavLink
-				style={({ isActive }) => {
-					return {
-						fontWeight: isActive ? 'bold' : '',
-					}
-				}}
-				className={styles['sidebarLink']}
-				to='/'>
+				to='/dashboard'>
 				Дэшборд
 			</NavLink>
 			<NavLink
-				style={({ isActive }) => {
-					return {
-						fontWeight: isActive ? 'bold' : '',
-					}
-				}}
+				style={({ isActive }) => ({
+					fontWeight: isActive ? 'bold' : '',
+				})}
 				className={styles['sidebarLink']}
-				to='/'>
+				to='/tasks'>
+				Поручения
+			</NavLink>
+			<NavLink
+				style={({ isActive }) => ({
+					fontWeight: isActive ? 'bold' : '',
+				})}
+				className={styles['sidebarLink']}
+				to='/events'>
+				События
+			</NavLink>
+
+			<NavLink
+				style={({ isActive }) => ({
+					fontWeight: isActive ? 'bold' : '',
+				})}
+				className={styles['sidebarLink']}
+				to='/reports'>
 				Отчеты
 			</NavLink>
 		</aside>
