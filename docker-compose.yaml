@@ -12,6 +12,11 @@ services:
       - "5432:5432"
 
   api:
+    environment:
+      DB_URL: postgresql+asyncpg://localhost:5432
+      DEBUG: 1
+      SECRET: SECRET
+      LOGGING_PATH: /log
     container_name: api_container
     build:
       context: ./api
