@@ -7,7 +7,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 router = APIRouter()
 
 
-@router.post("")
+@router.get("/")
+async def create_object(session: AsyncSession = Depends(get_async_session)):
+    return await service.get_objects_list(session)
+
+
+@router.post("/")
 async def create_object(
         object_: schemas.object.CreateObject,
         session: AsyncSession = Depends(get_async_session),
