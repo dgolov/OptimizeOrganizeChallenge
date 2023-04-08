@@ -5,7 +5,6 @@ from core.repository_entity import ObjectEntity
 
 
 async def get_objects_list(session) -> Any:
-    print(123)
     return await ObjectEntity(session).get_objects_list()
 
 
