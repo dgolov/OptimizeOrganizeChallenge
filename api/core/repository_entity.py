@@ -110,7 +110,7 @@ class TaskEntity(Base):
         return await self._all(query_result)
 
     async def create(self, data: CreateTask):
-        return await self._add(obj=Object, data=data)
+        return await self._add(obj=Task, data=data)
 
     async def update(self, pk: int, data: CreateTask):
         task = await self.session.get(Task, pk)
