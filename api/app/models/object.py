@@ -5,28 +5,6 @@ from core.engine import Base
 from datetime import datetime
 
 
-class Object(Base):
-    __tablename__ = "object"
-
-    id = Column(Integer, primary_key=True, index=True, unique=True, autoincrement=True)
-    county = Column(String)
-    region = Column(String)
-    address = Column(String)
-    object_type = Column(String)
-    area = Column(Float)
-    owner_id = Column(Integer, ForeignKey("human.id"))
-    owner = relationship("Human", lazy="joined")
-    actual_user_id = Column(Integer, ForeignKey("human.id"))
-    actual_user = relationship("Human", lazy="joined")
-    photo = Column(String)
-    created_at = Column(DateTime)
-    updated_at = Column(DateTime)
-    active = Column(Boolean)
-    extra_fields = Column(JSON)
-    # coordinates = Column()
-    tasks = relationship("Task", back_populates="object")
-
-
 class Task(Base):
     __tablename__ = "task"
 
@@ -44,6 +22,28 @@ class Task(Base):
     object = relationship("Object", back_populates="tasks")
 
 
+class Object(Base):
+    __tablename__ = "object"
+
+    id = Column(Integer, primary_key=True, index=True, unique=True, autoincrement=True)
+    county = Column(String)
+    region = Column(String)
+    address = Column(String)
+    object_type = Column(String)
+    area = Column(Float)
+    owner_id = Column(Integer, ForeignKey("human.id"))
+    owner = relationship("Human", lazy="joined", foreign_keys=[owner_id])
+    actual_user_id = Column(Integer, ForeignKey("human.id"))
+    actual_user = relationship("Human", lazy="joined", foreign_keys=[actual_user_id])
+    photo = Column(String)
+    created_at = Column(DateTime)
+    updated_at = Column(DateTime)
+    active = Column(Boolean)
+    extra_fields = Column(JSON)
+    # coordinates = Column()
+    tasks = relationship("Task", back_populates="object")
+
+
 class Solution(Base):
     __tablename__ = "solution"
 
@@ -52,7 +52,7 @@ class Solution(Base):
     description = Column(String)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow)
-    # task = relationship("Task", back_populates="solution")
+    task = relationship("Task", back_populates="solution")
 
 
 class WorkGroup(Base):
