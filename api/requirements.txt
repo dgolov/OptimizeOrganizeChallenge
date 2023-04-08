@@ -18,3 +18,4 @@ typing_extensions==4.5.0
 uvicorn==0.21.1
 fastapi-users==10.3.0
 fastapi-users-db-sqlalchemy==4.0.5
+xmltodict=0.13.0
