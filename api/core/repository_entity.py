@@ -87,7 +87,7 @@ class HumanEntity(Base):
         return await self._all(query_result)
 
     async def create(self, data: CreateHuman):
-        return await self._add(obj=Object, data=data)
+        return await self._add(obj=Human, data=data)
 
     async def update(self, pk: int, data: CreateHuman):
         human = await self.session.get(Human, pk)
@@ -110,7 +110,7 @@ class TaskEntity(Base):
         return await self._all(query_result)
 
     async def create(self, data: CreateTask):
-        return await self._add(obj=Object, data=data)
+        return await self._add(obj=Task, data=data)
 
     async def update(self, pk: int, data: CreateTask):
         task = await self.session.get(Task, pk)
@@ -133,7 +133,7 @@ class SolutionEntity(Base):
         return await self._all(query_result)
 
     async def create(self, data: CreateSolution):
-        return await self._add(obj=Object, data=data)
+        return await self._add(obj=Solution, data=data)
 
     async def update(self, pk: int, data: CreateSolution):
         solution = await self.session.get(Solution, pk)
