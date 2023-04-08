@@ -11,3 +11,7 @@ async def get_objects_list(session) -> Any:
 
 async def create_object(object_: schemas.object.CreateObject, session) -> Any:
     return await ObjectEntity(session).create(data=object_)
+
+
+async def update_object(pk: int, object_: schemas.object.CreateObject, session) -> Any:
+    return await ObjectEntity(session).update(pk=pk, data=object_)
