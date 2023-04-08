@@ -13,7 +13,7 @@ services:
 
   api:
     environment:
-      DB_URL: postgresql+asyncpg://localhost:5432
+      DB_URL: postgresql+asyncpg://user_pg:password_pg@postgres:5432/buildings
       DEBUG: 1
       SECRET: SECRET
       LOGGING_PATH: /log

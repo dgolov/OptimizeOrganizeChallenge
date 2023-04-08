@@ -1,0 +1,2 @@
+CREATE DATABASE buildings;
+GRANT ALL PRIVILEGES ON DATABASE buildings TO user_pg;
