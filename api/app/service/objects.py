@@ -1,7 +1,7 @@
 from typing import Any
 
 from app import schemas
-from core.repository_entity import ObjectEntity, TaskEntity, SolutionEntity
+from core.repository_entity import ObjectEntity, TaskEntity, SolutionEntity, WorkGroupEntity
 
 
 # Objects endpoints
@@ -73,3 +73,19 @@ async def update_solution(pk: int, object_: schemas.solution.CreateSolution, ses
 
 async def delete_solution(pk: int, session) -> Any:
     return await SolutionEntity(session).delete(pk=pk)
+
+
+async def get_work_group_list(session) -> Any:
+    return await WorkGroupEntity(session).get_work_group_list()
+
+
+async def create_work_group(object_: schemas.work_group.CreateWorkGroup, session) -> Any:
+    return await WorkGroupEntity(session).create(data=object_)
+
+
+async def update_work_group(pk: int, object_: schemas.work_group.CreateWorkGroup, session) -> Any:
+    return await WorkGroupEntity(session).update(pk=pk, data=object_)
+
+
+async def delete_work_group(pk: int, session) -> Any:
+    return await WorkGroupEntity(session).delete(pk=pk)
