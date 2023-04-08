@@ -42,6 +42,15 @@ class Object(Base):
     extra_fields = Column(JSON)
     # coordinates = Column()
     tasks = relationship("Task", back_populates="object")
+    condition_id = Column(Integer, ForeignKey("condition.id"))
+    condition = relationship("Condition", lazy="joined", foreign_keys=[condition_id])
+
+
+class Condition(Base):
+    __tablename__ = "condition"
+
+    id = Column(Integer, primary_key=True, index=True, unique=True, autoincrement=True)
+    value = Column(String)
 
 
 class Solution(Base):

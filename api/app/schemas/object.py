@@ -7,6 +7,18 @@ from app.schemas.human import HumanSchema
 from app.utils import parse_xml
 
 
+class ConditionBase(BaseModel):
+    value: str
+
+
+class ConditionSchema(ConditionBase):
+    id: int
+
+
+class CreateCondition(ConditionBase):
+    pass
+
+
 class ObjectBase(BaseModel):
     county: str
     region: str
@@ -27,11 +39,13 @@ class ObjectSchema(ObjectBase):
     created_at: datetime
     owner: HumanSchema
     actual_user: HumanSchema
+    condition: ConditionSchema
 
 
 class UpdateObject(ObjectBase):
     owner_id: int
     actual_user_id: int
+    condition_id: int
     updated_at: datetime = datetime.utcnow()
 
     class Config:
