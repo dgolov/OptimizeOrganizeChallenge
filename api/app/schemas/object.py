@@ -25,9 +25,9 @@ class ObjectBase(BaseModel):
     address: str
     object_type: str
     area: float
-    photo: str
-    active: bool
-    extra_fields: dict[str, Any]
+    photo: str = ""
+    active: bool = True
+    extra_fields: dict[str, Any] = {}
 
     class Config:
         orm_mode = True
@@ -58,7 +58,7 @@ class CreateObject(UpdateObject):
     @classmethod
     def from_xml(cls, xml_string: str) -> "CreateObject":
         if not bool(xml_dict := parse_xml(xml_string)):
-            raise ValidationError("Invalid xml")
+            raise ValueError("Invalid XML")
         data = {}
         for key, value in xml_dict.items():
             if key in cls.__fields__:
