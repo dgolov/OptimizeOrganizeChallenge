@@ -1,0 +1,17 @@
+.button {
+	background-color: rgba(46, 206, 255, 0.747);
+	outline: none;
+	border: none;
+	border-radius: 8px;
+	max-width: 15rem;
+	padding: 0.5rem 2rem;
+	font-size: 1.25rem;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+	&.icon {
+		padding: 0.5rem;
+	}
+	&:hover {
+		background-color: rgba(43, 153, 255, 0.747);
+	}
+}
