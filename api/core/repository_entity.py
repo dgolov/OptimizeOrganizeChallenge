@@ -57,7 +57,7 @@ class Base:
 
 class ObjectEntity(Base):
     async def get_objects_list(self):
-        query = select(Object)
+        query = select(Object).filter(Object.active == True)
         query_result = await self.session.execute(query)
         return await self._all(query_result)
 
