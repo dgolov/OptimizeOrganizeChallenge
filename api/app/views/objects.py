@@ -27,3 +27,11 @@ async def update_object(
         session: AsyncSession = Depends(get_async_session),
 ):
     return await service.update_object(pk, object_, session)
+
+
+@router.delete("/")
+async def update_object(
+        pk: int,
+        session: AsyncSession = Depends(get_async_session),
+):
+    return await service.delete_object(pk, session)

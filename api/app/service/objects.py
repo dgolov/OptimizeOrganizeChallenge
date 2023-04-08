@@ -14,3 +14,7 @@ async def create_object(object_: schemas.object.CreateObject, session) -> Any:
 
 async def update_object(pk: int, object_: schemas.object.CreateObject, session) -> Any:
     return await ObjectEntity(session).update(pk=pk, data=object_)
+
+
+async def delete_object(pk: int, session) -> Any:
+    return await ObjectEntity(session).delete(pk=pk)
