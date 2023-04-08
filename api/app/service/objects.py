@@ -10,6 +10,10 @@ async def get_objects_list(session, skip: int, limit: int) -> Any:
     return await ObjectEntity(session).get_objects_list(skip, limit)
 
 
+async def get_objects_by_id(pk, session) -> Any:
+    return await ObjectEntity(session).get_account_by_id(pk)
+
+
 async def create_object(object_: schemas.object.CreateObject, session) -> Any:
     return await ObjectEntity(session).create(data=object_)
 
@@ -33,6 +37,10 @@ async def get_task_list(session) -> Any:
     return await TaskEntity(session).get_task_list()
 
 
+async def get_task_by_id(pk, session) -> Any:
+    return await TaskEntity(session).get_task_by_id(pk)
+
+
 async def create_task(object_: schemas.task.CreateTask, session) -> Any:
     return await TaskEntity(session).create(data=object_)
 
@@ -49,6 +57,10 @@ async def delete_task(pk: int, session) -> Any:
 
 async def get_solution_list(session) -> Any:
     return await SolutionEntity(session).get_solution_list()
+
+
+async def get_solution_by_id(pk, session) -> Any:
+    return await SolutionEntity(session).get_solution_by_id(pk)
 
 
 async def create_solution(object_: schemas.solution.CreateSolution, session) -> Any:

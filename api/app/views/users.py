@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from app import schemas
 from app.service import users as service
 from app.users.auth import auth_backend
-from app.schemas.user import UserRead, UserCreate, UserUpdate
+from app.schemas.user import UserSchema, UserCreate, UserUpdate
 from app.users.utils import fastapi_users
 
 
@@ -21,12 +21,12 @@ router.include_router(
 )
 
 router.include_router(
-    fastapi_users.get_register_router(UserRead, UserCreate),
+    fastapi_users.get_register_router(UserSchema, UserCreate),
     tags=["auth"],
 )
 
 router.include_router(
-    fastapi_users.get_verify_router(UserRead),
+    fastapi_users.get_verify_router(UserSchema),
     tags=["auth"],
 )
 
@@ -36,7 +36,7 @@ router.include_router(
 )
 
 router.include_router(
-    fastapi_users.get_users_router(UserRead, UserUpdate, requires_verification=True),
+    fastapi_users.get_users_router(UserSchema, UserUpdate, requires_verification=True),
     tags=["Users"],
 )
 

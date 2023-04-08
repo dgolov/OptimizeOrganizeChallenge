@@ -3,19 +3,25 @@ from app import schemas
 from app.service import objects as service
 from core.engine import get_async_session
 from sqlalchemy.ext.asyncio import AsyncSession
+from typing import List
 
 router = APIRouter()
 
 
 # Objects routes
 
-@router.get("/")
-async def get_object(
+@router.get("/", response_model=List[schemas.object.ObjectSchema])
+async def get_objects_list(
         skip: int = schemas.basic.PAGINATION_SKIP,
         limit: int = schemas.basic.PAGINATION_LIMIT,
         session: AsyncSession = Depends(get_async_session)
 ):
     return await service.get_objects_list(session, skip=skip, limit=limit)
+
+
+@router.get("/{pk}")
+async def get_object_by_id(pk: int, session: AsyncSession = Depends(get_async_session)):
+    return await service.get_objects_by_id(pk, session)
 
 
 @router.post("/")
@@ -53,12 +59,17 @@ async def upload_object(file: UploadFile,
 # Tasks routes
 
 @router.get("/tasks")
-async def get_object(session: AsyncSession = Depends(get_async_session)):
+async def get_tasks_list(session: AsyncSession = Depends(get_async_session)):
     return await service.get_task_list(session)
 
 
+@router.get("/tasks/{pk}")
+async def get_task_by_id(pk: int, session: AsyncSession = Depends(get_async_session)):
+    return await service.get_task_by_id(pk, session)
+
+
 @router.post("/tasks")
-async def create_object(
+async def create_task(
         object_: schemas.task.CreateTask,
         session: AsyncSession = Depends(get_async_session),
 ):
@@ -66,7 +77,7 @@ async def create_object(
 
 
 @router.put("/tasks")
-async def update_object(
+async def update_task(
         pk: int,
         object_: schemas.task.CreateTask,
         session: AsyncSession = Depends(get_async_session),
@@ -75,7 +86,7 @@ async def update_object(
 
 
 @router.delete("/tasks")
-async def delete_object(
+async def delete_task(
         pk: int,
         session: AsyncSession = Depends(get_async_session),
 ):
@@ -85,12 +96,17 @@ async def delete_object(
 # Solutions routes
 
 @router.get("/solutions")
-async def get_object(session: AsyncSession = Depends(get_async_session)):
+async def get_solutions_list(session: AsyncSession = Depends(get_async_session)):
     return await service.get_solution_list(session)
 
 
+@router.get("/solutions/{pk}")
+async def get_solution_by_id(pk: int, session: AsyncSession = Depends(get_async_session)):
+    return await service.get_solution_by_id(pk, session)
+
+
 @router.post("/solutions")
-async def create_object(
+async def create_solution(
         object_: schemas.solution.CreateSolution,
         session: AsyncSession = Depends(get_async_session),
 ):
@@ -98,7 +114,7 @@ async def create_object(
 
 
 @router.put("/solutions")
-async def update_object(
+async def update_solution(
         pk: int,
         object_: schemas.solution.CreateSolution,
         session: AsyncSession = Depends(get_async_session),
@@ -107,7 +123,7 @@ async def update_object(
 
 
 @router.delete("/solutions")
-async def delete_object(
+async def delete_solution(
         pk: int,
         session: AsyncSession = Depends(get_async_session),
 ):

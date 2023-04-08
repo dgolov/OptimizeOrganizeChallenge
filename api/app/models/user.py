@@ -13,7 +13,11 @@ class User(SQLAlchemyBaseUserTable[int], Base):
     hashed_password: str = Column(String(length=1024), nullable=False)
     is_active: bool = Column(Boolean, default=True, nullable=False)
     is_superuser: bool = Column(Boolean, default=False, nullable=False)
-    is_verified: bool = Column(Boolean, default=False, nullable=False)
+    is_verified: bool = Column(Boolean, default=True, nullable=False)
+    first_name = Column(String)
+    middle_name = Column(String)
+    last_name = Column(String)
+    phone = Column(String)
 
 
 async def get_user_db(session: AsyncSession = Depends(get_async_session)):

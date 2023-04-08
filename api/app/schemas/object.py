@@ -3,12 +3,15 @@ from typing import Any
 
 from pydantic import BaseModel, ValidationError
 
-from app.schemas.human import HumanSchema
+from app.schemas.user import UserRead
 from app.utils import parse_xml
 
 
 class ConditionBase(BaseModel):
     value: str
+
+    class Config:
+        orm_mode = True
 
 
 class ConditionSchema(ConditionBase):
@@ -37,8 +40,8 @@ class ObjectSchema(ObjectBase):
     id: int
     updated_at: datetime
     created_at: datetime
-    owner: HumanSchema
-    actual_user: HumanSchema
+    owner: UserRead
+    actual_user: UserRead
     condition: ConditionSchema
 
 
