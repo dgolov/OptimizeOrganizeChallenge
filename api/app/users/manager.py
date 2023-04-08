@@ -2,7 +2,7 @@ from config import SECRET
 from typing import Optional
 from fastapi import Depends, Request
 from fastapi_users import BaseUserManager, IntegerIDMixin
-from .models import User, get_user_db
+from app.models.user import User, get_user_db
 
 
 class UserManager(IntegerIDMixin, BaseUserManager[User, int]):

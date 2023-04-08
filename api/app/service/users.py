@@ -1,4 +1,4 @@
-from app.models import Human
+from app.models.human import Human
 
 
 async def get_users(skip: int, limit: int):

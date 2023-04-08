@@ -1,8 +1,7 @@
-from datetime import datetime
+from sqlalchemy import Column, String, Integer, DateTime, Float, ForeignKey, Boolean, JSON
+from sqlalchemy.orm import relationship
 
 from core.engine import Base
-from sqlalchemy import Column, String, Integer, DateTime, Float, ForeignKey, Boolean, JSON, Tuple
-from sqlalchemy.orm import relationship
 
 
 class Object(Base):
@@ -23,20 +22,9 @@ class Object(Base):
     updated_at = Column(DateTime)
     active = Column(Boolean)
     extra_fields = Column(JSON)
-
-    tasks = relationship("Task", back_populates="object")
-
     # coordinates = Column()
 
-
-class Human(Base):
-    __tablename__ = "human"
-
-    id = Column(Integer, primary_key=True, index=True, unique=True, autoincrement=True)
-    first_name = Column(String)
-    middle_name = Column(String)
-    last_name = Column(String)
-    phone = Column(String)
+    tasks = relationship("Task", back_populates="object")
 
 
 class Task(Base):
