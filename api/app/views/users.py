@@ -37,6 +37,6 @@ router.include_router(
 
 router.include_router(
     fastapi_users.get_users_router(UserRead, UserUpdate, requires_verification=True),
-    tags=["users"],
+    tags=["Users"],
 )
 
