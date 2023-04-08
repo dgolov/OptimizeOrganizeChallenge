@@ -72,6 +72,8 @@ class WorkGroup(Base):
 
 
 class WorkGroupsUsers(Base):
+    __tablename__ = "work_group_users"
+
     work_group_id = Column(Integer, ForeignKey('work_group.id'), primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
 
