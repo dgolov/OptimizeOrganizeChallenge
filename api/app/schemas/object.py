@@ -28,6 +28,7 @@ class ObjectSchema(ObjectBase):
 
 class UpdateObject(ObjectBase):
     owner_id: int
+    actual_user_id: int
     updated_at: datetime = datetime.utcnow()
 
     class Config:
