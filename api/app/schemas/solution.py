@@ -3,10 +3,13 @@ from datetime import datetime
 
 
 class SolutionBase(BaseModel):
-    id: int
     description: str
     created_at: datetime
     updated_at: datetime
+
+
+class SolutionSchema(SolutionBase):
+    id: int
 
 
 class CreateSolution(SolutionBase):
