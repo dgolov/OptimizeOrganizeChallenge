@@ -122,7 +122,7 @@ class TaskEntity(Base):
 
 
 class SolutionEntity(Base):
-    async def get_task_list(self):
+    async def get_solution_list(self):
         query = select(Solution)
         query_result = await self.session.execute(query)
         return await self._all(query_result)
