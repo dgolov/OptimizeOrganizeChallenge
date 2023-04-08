@@ -69,6 +69,8 @@ class WorkGroup(Base):
 
     id = Column(Integer, primary_key=True, index=True, unique=True, autoincrement=True)
     tasks = relationship("Task", back_populates="work_group")
+    users = relationship('User', secondary='agents_groups',
+                          back_populates='agents')
 
 
 class WorkGroupsUsers(Base):

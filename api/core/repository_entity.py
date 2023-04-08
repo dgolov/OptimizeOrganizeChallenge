@@ -166,10 +166,9 @@ class WorkGroupEntity(Base):
         work_group = await self.session.get(WorkGroup, pk)
         return await self._delete(work_group)
 
-    async def get_task_by_id(self, pk: int):
-        query = select(WorkGroup).filter(WorkGroup.id == int(pk))
+    async def get_works_group_by_user_id(self, pk: int):
+        query = select(WorkGroup).filter(WorkGroup.user_id == int(pk))
         result = await self.session.execute(query)
         return self._first(result)
-
 
 
