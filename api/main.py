@@ -1,9 +1,6 @@
 from fastapi import FastAPI
-from starlette.requests import Request
-from starlette.responses import Response
-from routes import routes
-
+from app.views import router as api_router
 
 app = FastAPI()
 
-app.include_router(routes, prefix='/api')
+app.include_router(api_router, prefix='/api')
