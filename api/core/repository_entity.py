@@ -1,6 +1,8 @@
 from sqlalchemy import select, insert
-from api.app.models import Object, Human
-from api.app.schemas import CreateObject, CreateHuman
+from app.models.human import Human
+from app.models.object import Object
+from app.schemas.human import CreateHuman
+from app.schemas.object import CreateObject
 
 
 class Base:
