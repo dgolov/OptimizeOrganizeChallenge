@@ -1,0 +1,15 @@
+.layout {
+	display: grid;
+	width: 100%;
+	height: 100vh;
+	grid-template-columns: 300px 1fr 1fr;
+	grid-template-areas: 'sidebar main main';
+
+	& main {
+		grid-area: main;
+	}
+	& main,
+	aside {
+		padding: 1rem;
+	}
+}
