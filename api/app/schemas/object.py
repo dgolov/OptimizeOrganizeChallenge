@@ -5,6 +5,18 @@ from pydantic import BaseModel
 from app.schemas.human import HumanSchema
 
 
+class ConditionBase(BaseModel):
+    value: str
+
+
+class ConditionSchema(ConditionBase):
+    id: int
+
+
+class CreateCondition(ConditionBase):
+    pass
+
+
 class ObjectBase(BaseModel):
     county: str
     region: str
@@ -13,6 +25,7 @@ class ObjectBase(BaseModel):
     area: float
     photo: str
     active: bool
+    condition: ConditionSchema
 
     class Config:
         orm_mode = True
