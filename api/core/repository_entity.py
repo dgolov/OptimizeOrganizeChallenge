@@ -5,7 +5,7 @@ from app.schemas.human import CreateHuman
 from app.schemas.task import CreateTask
 from app.schemas.solution import CreateSolution
 from app.schemas.object import CreateObject
-
+from app.schemas.work_group import CreateWorkGroup
 
 class Base:
     def __init__(self, session):
@@ -150,7 +150,26 @@ class SolutionEntity(Base):
 
 
 class WorkGroupEntity(Base):
-    pass
+    async def get_work_group_list(self):
+        query = select(WorkGroup)
+        query_result = await self.session.execute(query)
+        return await self._all(query_result)
+
+    async def create(self, data: CreateWorkGroup):
+        return await self._add(obj=WorkGroup, data=data)
+
+    async def update(self, pk: int, data: CreateWorkGroup):
+        work_group = await self.session.get(WorkGroup, pk)
+        return await self._update(work_group, data)
+
+    async def delete(self, pk: int):
+        work_group = await self.session.get(WorkGroup, pk)
+        return await self._delete(work_group)
+
+    async def get_task_by_id(self, pk: int):
+        query = select(WorkGroup).filter(WorkGroup.id == int(pk))
+        result = await self.session.execute(query)
+        return self._first(result)
 
 
 
