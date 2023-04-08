@@ -120,9 +120,14 @@ class TaskEntity(Base):
         task = await self.session.get(Task, pk)
         return await self._delete(task)
 
+    async def get_task_by_id(self, pk: int):
+        query = select(Task).filter(Task.id == int(pk))
+        result = await self.session.execute(query)
+        return self._first(result)
+
 
 class SolutionEntity(Base):
-    async def get_task_list(self):
+    async def get_solution_list(self):
         query = select(Solution)
         query_result = await self.session.execute(query)
         return await self._all(query_result)
@@ -137,6 +142,11 @@ class SolutionEntity(Base):
     async def delete(self, pk: int):
         solution = await self.session.get(Solution, pk)
         return await self._delete(solution)
+
+    async def get_task_by_id(self, pk: int):
+        query = select(Solution).filter(Solution.id == int(pk))
+        result = await self.session.execute(query)
+        return self._first(result)
 
 
 class WorkGroupEntity(Base):
