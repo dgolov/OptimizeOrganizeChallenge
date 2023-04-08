@@ -25,7 +25,6 @@ class ObjectBase(BaseModel):
     area: float
     photo: str
     active: bool
-    condition: ConditionSchema
 
     class Config:
         orm_mode = True
@@ -37,11 +36,13 @@ class ObjectSchema(ObjectBase):
     created_at: datetime
     owner: HumanSchema
     actual_user: HumanSchema
+    condition: ConditionSchema
 
 
 class UpdateObject(ObjectBase):
     owner_id: int
     actual_user_id: int
+    condition_id: int
     updated_at: datetime = datetime.utcnow()
 
     class Config:
