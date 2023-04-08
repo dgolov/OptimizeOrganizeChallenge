@@ -3,7 +3,6 @@ from datetime import datetime
 
 
 class TaskBase(BaseModel):
-    id: int
     deadline: datetime
     description: str
     responsible: str
@@ -12,9 +11,13 @@ class TaskBase(BaseModel):
     object_id: int
     created_at: datetime
     updated_at = datetime
+
     class Config:
         orm_mode = True
 
+
+class TaskSchema(TaskBase):
+    id: int
 
 
 class CreateTask(TaskBase):
