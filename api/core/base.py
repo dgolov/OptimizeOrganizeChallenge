@@ -1,4 +1,5 @@
-from api.app.models import Object, Human
-from api.users.models import User
-from api.core.engine import Base
+from app.models.object import Object, Task, Solution, WorkGroup
+from app.models.human import Human
+from app.models.user import User
+from core.engine import Base
 
