@@ -70,6 +70,17 @@ class WorkGroup(Base):
     id = Column(Integer, primary_key=True, index=True, unique=True, autoincrement=True)
     tasks = relationship("Task", back_populates="work_group")
 
+
+class WorkGroupsUsers(Base):
+    work_group_id = Column(Integer, ForeignKey('work_group.id'), primary_key=True)
+    user_id = Column(Integer, ForeignKey('user.id'), primary_key=True)
+
+    work_group = relationship('WorkGroup')
+    user = relationship('User')
+
+
+
+
 #
 # class Role(Base):
 #     __tablename__ = "role"
