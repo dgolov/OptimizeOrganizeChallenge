@@ -42,6 +42,7 @@ async def delete_object(
 
 
 @router.post("/upload_xml")
-async def upload_object(file: UploadFile):
+async def upload_object(file: UploadFile,
+                        session: AsyncSession = Depends(get_async_session),):
     contents = await file.read()
-    return await service.create_object_from_xml(contents.decode())
+    return await service.create_object_from_xml(contents.decode(), session)

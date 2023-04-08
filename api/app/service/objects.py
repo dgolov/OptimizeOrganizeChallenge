@@ -5,7 +5,7 @@ from core.repository_entity import ObjectEntity
 
 
 async def get_objects_list(session, skip: int, limit: int) -> Any:
-    return await ObjectEntity(session).get_objects_list()
+    return await ObjectEntity(session).get_objects_list(skip, limit)
 
 
 async def create_object(object_: schemas.object.CreateObject, session) -> Any:
