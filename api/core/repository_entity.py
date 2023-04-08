@@ -97,7 +97,7 @@ class HumanEntity(Base):
         human = await self.session.get(Human, pk)
         return await self._delete(human)
 
-    async def get_account_by_id(self, pk: int):
+    async def get_human_by_id(self, pk: int):
         query = select(Human).filter(Human.id == int(pk))
         result = await self.session.execute(query)
         return self._first(result)
@@ -120,6 +120,11 @@ class TaskEntity(Base):
         task = await self.session.get(Task, pk)
         return await self._delete(task)
 
+    async def get_task_by_id(self, pk: int):
+        query = select(Task).filter(Task.id == int(pk))
+        result = await self.session.execute(query)
+        return self._first(result)
+
 
 class SolutionEntity(Base):
     async def get_solution_list(self):
@@ -137,6 +142,11 @@ class SolutionEntity(Base):
     async def delete(self, pk: int):
         solution = await self.session.get(Solution, pk)
         return await self._delete(solution)
+
+    async def get_solution_by_id(self, pk: int):
+        query = select(Solution).filter(Solution.id == int(pk))
+        result = await self.session.execute(query)
+        return self._first(result)
 
 
 class WorkGroupEntity(Base):
