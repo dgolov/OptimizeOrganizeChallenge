@@ -1,4 +1,4 @@
-from core.engine import Base, get_async_session
+from api.core.engine import Base, get_async_session
 from fastapi import Depends
 from fastapi_users.db import SQLAlchemyBaseUserTable, SQLAlchemyUserDatabase
 from sqlalchemy import Column, String, Integer, Boolean
