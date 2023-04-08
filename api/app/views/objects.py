@@ -3,13 +3,14 @@ from app import schemas
 from app.service import objects as service
 from core.engine import get_async_session
 from sqlalchemy.ext.asyncio import AsyncSession
+from typing import List
 
 router = APIRouter()
 
 
 # Objects routes
 
-@router.get("/")
+@router.get("/", response_model=List[schemas.object.ObjectSchema])
 async def get_objects_list(
         skip: int = schemas.basic.PAGINATION_SKIP,
         limit: int = schemas.basic.PAGINATION_LIMIT,

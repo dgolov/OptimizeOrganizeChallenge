@@ -1,7 +1,5 @@
 from sqlalchemy import select, insert
-from app.models.human import Human
 from app.models.object import Object, Task, Solution, WorkGroup
-from app.schemas.human import CreateHuman
 from app.schemas.task import CreateTask
 from app.schemas.solution import CreateSolution
 from app.schemas.object import CreateObject
@@ -59,7 +57,9 @@ class Base:
 
 class ObjectEntity(Base):
     async def get_objects_list(self, skip: int, limit: int):
-        query = select(Object).filter(Object.active == True).skip(skip).limit(limit)
+        query = select(Object).filter(Object.active == True)
+        # TODO Не работает :)
+        # query = select(Object).filter(Object.active == True).skip(skip).limit(limit)
         query_result = await self.session.execute(query)
         return await self._all(query_result)
 
@@ -76,29 +76,6 @@ class ObjectEntity(Base):
 
     async def get_account_by_id(self, pk: int):
         query = select(Object).filter(Object.id == int(pk))
-        result = await self.session.execute(query)
-        return self._first(result)
-
-
-class HumanEntity(Base):
-    async def get_human_list(self):
-        query = select(Human)
-        query_result = await self.session.execute(query)
-        return await self._all(query_result)
-
-    async def create(self, data: CreateHuman):
-        return await self._add(obj=Human, data=data)
-
-    async def update(self, pk: int, data: CreateHuman):
-        human = await self.session.get(Human, pk)
-        return await self._update(human, data)
-
-    async def delete(self, pk: int):
-        human = await self.session.get(Human, pk)
-        return await self._delete(human)
-
-    async def get_human_by_id(self, pk: int):
-        query = select(Human).filter(Human.id == int(pk))
         result = await self.session.execute(query)
         return self._first(result)
 
