@@ -9,8 +9,6 @@ class TaskBase(BaseModel):
     work_group_id: int
     solution_id: int
     object_id: int
-    created_at: datetime
-    updated_at = datetime
 
     class Config:
         orm_mode = True
@@ -18,8 +16,17 @@ class TaskBase(BaseModel):
 
 class TaskSchema(TaskBase):
     id: int
+    created_at: datetime
+    updated_at: datetime
 
 
-class CreateTask(TaskBase):
-    pass
+class UpdateTask(TaskBase):
+    updated_at: datetime = datetime.utcnow()
+
+    class Config:
+        validate_assignment = True
+
+
+class CreateTask(UpdateTask):
+    created_at: datetime = datetime.utcnow()
 
