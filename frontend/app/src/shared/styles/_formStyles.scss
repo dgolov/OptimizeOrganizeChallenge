@@ -1,0 +1,23 @@
+@import './variables';
+.form {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	margin-top: 50px;
+	min-width: 500px;
+	height: 400px;
+
+	&__inputs {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+		align-items: stretch;
+	}
+}
+.textArea {
+	resize: none;
+}
+
+.error {
+	color: red;
+}

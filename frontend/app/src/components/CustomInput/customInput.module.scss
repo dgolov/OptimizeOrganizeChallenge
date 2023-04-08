@@ -1,0 +1,58 @@
+@import '../../shared/styles/variables';
+@import '../../shared/styles/formStyles';
+
+.input {
+	position: relative;
+	transition: all 0.3s ease-in-out;
+	height: 1.75rem;
+	width: 11rem;
+	display: flex;
+	justify-content: center;
+	gap: 0.5rem;
+	align-items: center;
+	font-size: 1rem;
+	border-radius: 1rem;
+	padding: 0.6rem;
+
+	margin: 1rem 0;
+
+	outline: none;
+	border: 1px solid $aqua;
+	background: white;
+
+	&:focus {
+		border-color: black;
+
+		& ~ label {
+			transition: all 0.1s ease;
+			font-weight: bold;
+		}
+	}
+	&.sm {
+		width: 11rem;
+	}
+	&.md {
+		width: 12rem;
+	}
+	&.lg {
+		width: 14rem;
+	}
+	&.full {
+		width: 100%;
+	}
+	&.error {
+		border-color: rgb(255, 85, 85);
+	}
+
+	&Container {
+		&Top {
+			display: flex;
+			flex-direction: column-reverse;
+		}
+	}
+}
+
+.textArea {
+	width: 100%;
+	height: auto;
+}

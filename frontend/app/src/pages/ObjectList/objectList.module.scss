@@ -30,7 +30,8 @@
 .controlButtons {
 	display: flex;
 	justify-content: space-between;
-	width: 20%;
+	width: 100%;
+	max-width: 16rem;
 	align-items: center;
 	align-self: end;
 }
