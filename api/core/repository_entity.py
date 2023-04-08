@@ -1,7 +1,9 @@
 from sqlalchemy import select, insert
 from app.models.human import Human
-from app.models.object import Object
+from app.models.object import Object, Task, Solution, WorkGroup
 from app.schemas.human import CreateHuman
+from app.schemas.task import CreateTask
+from app.schemas.solution import CreateSolution
 from app.schemas.object import CreateObject
 
 
@@ -99,3 +101,46 @@ class HumanEntity(Base):
         query = select(Human).filter(Human.id == int(pk))
         result = await self.session.execute(query)
         return self._first(result)
+
+
+class TaskEntity(Base):
+    async def get_task_list(self):
+        query = select(Task)
+        query_result = await self.session.execute(query)
+        return await self._all(query_result)
+
+    async def create(self, data: CreateTask):
+        return await self._add(obj=Object, data=data)
+
+    async def update(self, pk: int, data: CreateTask):
+        task = await self.session.get(Task, pk)
+        return await self._update(task, data)
+
+    async def delete(self, pk: int):
+        task = await self.session.get(Task, pk)
+        return await self._delete(task)
+
+
+class SolutionEntity(Base):
+    async def get_task_list(self):
+        query = select(Solution)
+        query_result = await self.session.execute(query)
+        return await self._all(query_result)
+
+    async def create(self, data: CreateSolution):
+        return await self._add(obj=Object, data=data)
+
+    async def update(self, pk: int, data: CreateSolution):
+        solution = await self.session.get(Solution, pk)
+        return await self._update(solution, data)
+
+    async def delete(self, pk: int):
+        solution = await self.session.get(Solution, pk)
+        return await self._delete(solution)
+
+
+class WorkGroupEntity(Base):
+    pass
+
+
+
