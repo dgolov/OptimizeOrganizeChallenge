@@ -160,3 +160,10 @@ async def delete_object(
     return await service.delete_work_group(pk, session)
 
 
+@router.get("/work_group_by_user{user_id}")
+async def get_work_groups_user(
+        user_id:int,
+        session: AsyncSession = Depends(get_async_session),
+):
+        return await service.get_work_groups_user(user_id, session)
+
