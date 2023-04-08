@@ -1,8 +1,10 @@
 from datetime import datetime
+from typing import Any
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError
 
 from app.schemas.human import HumanSchema
+from app.utils import parse_xml
 
 
 class ConditionBase(BaseModel):
@@ -23,8 +25,9 @@ class ObjectBase(BaseModel):
     address: str
     object_type: str
     area: float
-    photo: str
-    active: bool
+    photo: str = ""
+    active: bool = True
+    extra_fields: dict[str, Any] = {}
 
     class Config:
         orm_mode = True
@@ -51,3 +54,18 @@ class UpdateObject(ObjectBase):
 
 class CreateObject(UpdateObject):
     created_at: datetime = datetime.utcnow()
+
+    @classmethod
+    def from_xml(cls, xml_string: str) -> "CreateObject":
+        if not bool(xml_dict := parse_xml(xml_string)):
+            raise ValueError("Invalid XML")
+        data = {}
+        for key, value in xml_dict.items():
+            if key in cls.__fields__:
+                data[key] = value
+                continue
+            data.setdefault("extra_fields", {})
+            data["extra_fields"][key] = value
+        return cls.parse_obj(data)
+
+

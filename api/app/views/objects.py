@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, UploadFile
 from app import schemas
 from app.service import objects as service
 from core.engine import get_async_session
@@ -8,8 +8,12 @@ router = APIRouter()
 
 
 @router.get("/")
-async def create_object(session: AsyncSession = Depends(get_async_session)):
-    return await service.get_objects_list(session)
+async def get_object(
+        skip: int = schemas.basic.PAGINATION_SKIP,
+        limit: int = schemas.basic.PAGINATION_LIMIT,
+        session: AsyncSession = Depends(get_async_session)
+):
+    return await service.get_objects_list(session, skip=skip, limit=limit)
 
 
 @router.post("/")
@@ -30,8 +34,15 @@ async def update_object(
 
 
 @router.delete("/")
-async def update_object(
+async def delete_object(
         pk: int,
         session: AsyncSession = Depends(get_async_session),
 ):
     return await service.delete_object(pk, session)
+
+
+@router.post("/upload_xml")
+async def upload_object(file: UploadFile,
+                        session: AsyncSession = Depends(get_async_session),):
+    contents = await file.read()
+    return await service.create_object_from_xml(contents.decode(), session)

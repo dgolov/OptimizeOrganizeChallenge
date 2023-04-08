@@ -1,0 +1,36 @@
+.objectList {
+	&Container {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+	&Item {
+		cursor: pointer;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		background: #fafafa;
+		box-shadow: 0px 4px 4px rgba(65, 65, 65, 0.25);
+		color: black;
+		border-radius: 8px;
+		height: 3rem;
+		padding: 1rem;
+
+		margin: 1rem 0;
+		&Name {
+			display: flex;
+			flex-direction: column;
+			& p {
+				margin: 0;
+			}
+		}
+	}
+}
+
+.controlButtons {
+	display: flex;
+	justify-content: space-between;
+	width: 20%;
+	align-items: center;
+	align-self: end;
+}
