@@ -1,3 +1,5 @@
+from sqlalchemy.orm import relationship
+
 from core.engine import Base, get_async_session
 from fastapi import Depends
 from fastapi_users.db import SQLAlchemyBaseUserTable, SQLAlchemyUserDatabase
@@ -18,6 +20,8 @@ class User(SQLAlchemyBaseUserTable[int], Base):
     middle_name = Column(String)
     last_name = Column(String)
     phone = Column(String)
+
+    work_groups = relationship('WorkGroup', secondary='work_group_users', back_populates='users')
 
 
 async def get_user_db(session: AsyncSession = Depends(get_async_session)):
