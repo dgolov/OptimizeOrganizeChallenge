@@ -4,3 +4,4 @@ import app.schemas.task
 import app.schemas.solution
 import app.schemas.user
 import app.schemas.work_group
+import app.schemas.condition

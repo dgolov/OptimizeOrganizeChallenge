@@ -1,9 +1,11 @@
 from sqlalchemy import select, insert
-from app.models.object import Object, Task, Solution, WorkGroup
+from app.models.object import Object, Task, Solution, WorkGroup, Condition
 from app.schemas.task import CreateTask
 from app.schemas.solution import CreateSolution
-from app.schemas.object import CreateObject
+from app.schemas.object import CreateObject, UpdateObject
 from app.schemas.work_group import CreateWorkGroup
+from app.schemas.condition import CreateCondition
+
 
 class Base:
     def __init__(self, session):
@@ -66,7 +68,7 @@ class ObjectEntity(Base):
     async def create(self, data: CreateObject):
         return await self._add(obj=Object, data=data)
 
-    async def update(self, pk: int, data: CreateObject):
+    async def update(self, pk: int, data: UpdateObject):
         item = await self.session.get(Object, pk)
         return await self._update(item, data)
 
@@ -149,3 +151,24 @@ class WorkGroupEntity(Base):
         return self._first(result)
 
 
+class ConditionEntity(Base):
+    async def get_condition_list(self):
+        query = select(Condition)
+        query_result = await self.session.execute(query)
+        return await self._all(query_result)
+
+    async def create(self, data: CreateCondition):
+        return await self._add(obj=Condition, data=data)
+
+    async def update(self, pk: int, data: CreateCondition):
+        condition = await self.session.get(Condition, pk)
+        return await self._update(condition, data)
+
+    async def delete(self, pk: int):
+        condition = await self.session.get(Condition, pk)
+        return await self._delete(condition)
+
+    async def get_condition_by_id(self, pk: int):
+        query = select(Condition).filter(Condition.id == int(pk))
+        result = await self.session.execute(query)
+        return self._first(result)
