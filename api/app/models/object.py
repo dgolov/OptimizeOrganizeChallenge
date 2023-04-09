@@ -36,8 +36,8 @@ class Object(Base):
     actual_user_id = Column(Integer, ForeignKey("user.id"))
     actual_user = relationship("User", lazy="joined", foreign_keys=[actual_user_id])
     photo = Column(String)
-    created_at = Column(DateTime)
-    updated_at = Column(DateTime)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow)
     active = Column(Boolean)
     extra_fields = Column(JSON)
     # coordinates = Column()
@@ -51,6 +51,8 @@ class Condition(Base):
 
     id = Column(Integer, primary_key=True, index=True, unique=True, autoincrement=True)
     value = Column(String)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow)
 
 
 class Solution(Base):
@@ -61,6 +63,7 @@ class Solution(Base):
     description = Column(String)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow)
+
     task = relationship("Task", back_populates="solution")
 
 
@@ -68,8 +71,11 @@ class WorkGroup(Base):
     __tablename__ = "work_group"
 
     id = Column(Integer, primary_key=True, index=True, unique=True, autoincrement=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow)
     tasks = relationship("Task", back_populates="work_group")
     users = relationship('User', secondary='work_group_users', back_populates='work_groups')
+
 
 
 class WorkGroupsUsers(Base):

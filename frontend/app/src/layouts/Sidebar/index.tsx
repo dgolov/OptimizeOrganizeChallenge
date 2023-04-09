@@ -45,6 +45,14 @@ export const Sidebar = () => {
 				to='/reports'>
 				Отчеты
 			</NavLink>
+			<NavLink
+				style={({ isActive }) => ({
+					fontWeight: isActive ? 'bold' : '',
+				})}
+				className={styles['sidebarLink']}
+				to='http://localhost:8000/admin'>
+				Админ
+			</NavLink>
 		</aside>
 	)
 }

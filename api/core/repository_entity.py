@@ -39,7 +39,7 @@ class Base:
         return instance
 
     async def _update(self, obj, data):
-        for field, value in data.dict().items():
+        for field, value in data.dict(exclude_none=True).items():
             setattr(obj, field, value)
         await self.session.commit()
         return obj

@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Any
+from typing import Any, Optional
 
 from pydantic import BaseModel
 
@@ -33,9 +33,9 @@ class ObjectSchema(ObjectBase):
 
 
 class UpdateObject(ObjectBase):
-    owner_id: int
-    actual_user_id: int
-    condition_id: int
+    owner_id: Optional[int]
+    actual_user_id: Optional[int]
+    condition_id: Optional[int]
     updated_at: datetime = datetime.utcnow()
 
     class Config:
