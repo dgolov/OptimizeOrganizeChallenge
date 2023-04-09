@@ -18,6 +18,8 @@ services:
       SECRET: SECRET
       LOGGING_PATH: /log
     container_name: api_container
+    volumes:
+      - ./api/migrations/versions:/api/migrations/versions
     build:
       context: ./api
       dockerfile: api.dockerfile

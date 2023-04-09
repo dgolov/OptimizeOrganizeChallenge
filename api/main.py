@@ -9,6 +9,15 @@ from core.engine import engine
 
 app = FastAPI()
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 admin = Admin(
     app=app,
     engine=engine,
@@ -19,12 +28,5 @@ admin = Admin(
 
 admin.add_view(ConditionView)
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
 
 app.include_router(api_router, prefix='/api')
