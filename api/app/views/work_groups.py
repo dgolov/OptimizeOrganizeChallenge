@@ -9,7 +9,9 @@ router = APIRouter()
 
 
 @router.get("")
-async def get_work_groups(session: AsyncSession = Depends(get_async_session)):
+async def get_work_groups(
+        session: AsyncSession = Depends(get_async_session)
+) -> list[schemas.work_group.WorkSchema]:
     return await service.get_work_group_list(session)
 
 
@@ -17,7 +19,7 @@ async def get_work_groups(session: AsyncSession = Depends(get_async_session)):
 async def create_work_group(
         object_: schemas.work_group.CreateWorkGroup,
         session: AsyncSession = Depends(get_async_session),
-):
+) -> schemas.work_group.WorkSchema:
     return await service.create_work_group(object_, session)
 
 
@@ -26,7 +28,7 @@ async def update_work_group(
         pk: int,
         object_: schemas.work_group.CreateWorkGroup,
         session: AsyncSession = Depends(get_async_session),
-):
+) -> schemas.work_group.WorkSchema:
     return await service.update_work_group(pk, object_, session)
 
 
@@ -42,5 +44,5 @@ async def delete_work_group(
 async def get_work_groups_user(
         user_id: int,
         session: AsyncSession = Depends(get_async_session),
-):
+) -> schemas.work_group.WorkSchema:
     return await service.get_work_groups_user(user_id, session)

@@ -33,21 +33,16 @@ class Base:
         return len(result)
 
     async def _add(self, obj, data):
-        data = data.dict()
-        query = insert(obj).values(**data)
-        await self.session.execute(query)
+        instance = obj(**data.dict())
+        self.session.add(instance)
         await self.session.commit()
-        return {
-            "status": "success"
-        }
+        return instance
 
     async def _update(self, obj, data):
         for field, value in data.dict().items():
             setattr(obj, field, value)
         await self.session.commit()
-        return {
-            "status": "success"
-        }
+        return obj
 
     async def _delete(self, obj):
         await self.session.delete(obj)

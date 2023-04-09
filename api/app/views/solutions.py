@@ -8,12 +8,17 @@ router = APIRouter()
 
 
 @router.get("")
-async def get_solutions_list(session: AsyncSession = Depends(get_async_session)):
+async def get_solutions_list(
+        session: AsyncSession = Depends(get_async_session)
+) -> list[schemas.solution.SolutionSchema]:
     return await service.get_solution_list(session)
 
 
 @router.get("/{pk}")
-async def get_solution_by_id(pk: int, session: AsyncSession = Depends(get_async_session)):
+async def get_solution_by_id(
+        pk: int,
+        session: AsyncSession = Depends(get_async_session)
+) -> schemas.solution.SolutionSchema:
     return await service.get_solution_by_id(pk, session)
 
 
@@ -21,7 +26,7 @@ async def get_solution_by_id(pk: int, session: AsyncSession = Depends(get_async_
 async def create_solution(
         object_: schemas.solution.CreateSolution,
         session: AsyncSession = Depends(get_async_session),
-):
+) -> schemas.solution.SolutionSchema:
     return await service.create_solution(object_, session)
 
 
@@ -30,7 +35,7 @@ async def update_solution(
         pk: int,
         object_: schemas.solution.CreateSolution,
         session: AsyncSession = Depends(get_async_session),
-):
+) -> schemas.solution.SolutionSchema:
     return await service.update_solution(pk, object_, session)
 
 

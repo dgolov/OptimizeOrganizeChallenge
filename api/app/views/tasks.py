@@ -10,12 +10,17 @@ router = APIRouter()
 
 
 @router.get("")
-async def get_tasks_list(session: AsyncSession = Depends(get_async_session)):
+async def get_tasks_list(
+        session: AsyncSession = Depends(get_async_session)
+) -> list[schemas.task.TaskSchema]:
     return await service.get_task_list(session)
 
 
 @router.get("/{pk}")
-async def get_task_by_id(pk: int, session: AsyncSession = Depends(get_async_session)):
+async def get_task_by_id(
+        pk: int,
+        session: AsyncSession = Depends(get_async_session)
+) -> schemas.task.TaskSchema:
     return await service.get_task_by_id(pk, session)
 
 
@@ -23,7 +28,7 @@ async def get_task_by_id(pk: int, session: AsyncSession = Depends(get_async_sess
 async def create_task(
         object_: schemas.task.CreateTask,
         session: AsyncSession = Depends(get_async_session),
-):
+) -> schemas.task.TaskSchema:
     return await service.create_task(object_, session)
 
 
@@ -32,7 +37,7 @@ async def update_task(
         pk: int,
         object_: schemas.task.CreateTask,
         session: AsyncSession = Depends(get_async_session),
-):
+) -> schemas.task.TaskSchema:
     return await service.update_task(pk, object_, session)
 
 

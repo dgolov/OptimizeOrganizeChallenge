@@ -4,22 +4,9 @@ from typing import Any
 from pydantic import BaseModel
 
 from app.schemas.user import UserRead
+from app.schemas.condition import ConditionSchema
+
 from app.utils import parse_xml
-
-
-class ConditionBase(BaseModel):
-    value: str
-
-    class Config:
-        orm_mode = True
-
-
-class ConditionSchema(ConditionBase):
-    id: int
-
-
-class CreateCondition(ConditionBase):
-    pass
 
 
 class ObjectBase(BaseModel):
@@ -70,5 +57,3 @@ class CreateObject(UpdateObject):
             data.setdefault("extra_fields", {})
             data["extra_fields"][key] = value
         return cls.parse_obj(data)
-
-

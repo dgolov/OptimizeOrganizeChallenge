@@ -8,12 +8,17 @@ router = APIRouter()
 
 
 @router.get("")
-async def get_conditions_list(session: AsyncSession = Depends(get_async_session)):
+async def get_conditions_list(
+        session: AsyncSession = Depends(get_async_session)
+) -> list[schemas.condition.ConditionSchema]:
     return await service.get_condition_list(session)
 
 
 @router.get("/{pk}")
-async def get_condition_by_id(pk: int, session: AsyncSession = Depends(get_async_session)):
+async def get_condition_by_id(
+        pk: int,
+        session: AsyncSession = Depends(get_async_session)
+) -> schemas.condition.ConditionSchema:
     return await service.get_condition_by_id(pk, session)
 
 
@@ -21,7 +26,7 @@ async def get_condition_by_id(pk: int, session: AsyncSession = Depends(get_async
 async def create_condition(
         object_: schemas.condition.CreateCondition,
         session: AsyncSession = Depends(get_async_session),
-):
+) -> schemas.condition.ConditionSchema:
     return await service.create_condition(object_, session)
 
 
@@ -30,7 +35,7 @@ async def update_condition(
         pk: int,
         object_: schemas.condition.CreateCondition,
         session: AsyncSession = Depends(get_async_session),
-):
+) -> schemas.condition.ConditionSchema:
     return await service.update_condition(pk, object_, session)
 
 
