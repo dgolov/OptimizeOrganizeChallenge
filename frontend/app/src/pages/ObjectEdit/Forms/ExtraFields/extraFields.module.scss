@@ -1,0 +1,14 @@
+.extraFieldsPage {
+	display: flex;
+	flex-direction: column;
+}
+.addButton {
+	align-self: end;
+}
+
+.extraFieldContainer {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	max-width: 32rem;
+}

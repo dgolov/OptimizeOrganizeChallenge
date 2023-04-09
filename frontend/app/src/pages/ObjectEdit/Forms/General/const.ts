@@ -23,4 +23,10 @@ export const inputs = [
 		type: 'text',
 		size: 'lg',
 	},
+	{
+		name: 'area',
+		label: 'Площадь объекта',
+		type: 'text',
+		size: 'lg',
+	},
 ]

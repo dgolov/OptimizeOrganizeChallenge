@@ -1,11 +1,20 @@
+import { useEffect } from 'react'
 import { objects } from './mockData'
 import { useNavigate } from 'react-router-dom'
 import styles from './objectList.module.scss'
 import { GrDocumentUpload } from 'react-icons/gr'
 import { CustomButton } from '../../components/CustomButton'
+import { useStore } from 'effector-react'
+import { $objectsList, fetchObjectsListFx } from './model'
+import { currentObjectChanged } from '../ObjectEdit/model'
 
 export const ObjectList = () => {
 	const navigate = useNavigate()
+	const objectsList = useStore($objectsList)
+	useEffect(() => {
+		fetchObjectsListFx()
+	}, [])
+	if (!objectsList.length) return <>loading</>
 	return (
 		<div className={styles['objectListContainer']}>
 			<div className={styles['controlButtons']}>
@@ -15,16 +24,17 @@ export const ObjectList = () => {
 				<CustomButton>Новый объект</CustomButton>
 			</div>
 
-			{objects.map((object) => (
+			{objectsList.map((obj) => (
 				<div
-					onClick={() => navigate(`/object/${object.id}`)}
+					key={obj.id}
+					onClick={() => navigate(`/object/${obj.id}`)}
 					className={styles['objectListItem']}>
 					<div className={styles['objectListItemName']}>
-						<p>{object.address}</p>
-						<span>{object.object_type}</span>
+						<p>{obj.address}</p>
+						<span>{obj.object_type}</span>
 					</div>
 					<p className={styles['objectListItemDate']}>
-						{object.created_at.toLocaleString('en-GB', {
+						{obj.created_at.toLocaleString('en-GB', {
 							timeZone: 'UTC',
 						})}
 					</p>
